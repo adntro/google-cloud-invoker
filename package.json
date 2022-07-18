@@ -1,6 +1,6 @@
 {
   "name": "@adntro/google-cloud-invoker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Google Cloud Run & Google Cloud Function invoker",
   "author": "Adntro Genetics SL",
   "repository": {
@@ -27,11 +27,11 @@
     "clean": "gts clean",
     "compile": "tsc",
     "fix": "gts fix",
-    "prepare": "npm.cmd run compile",
-    "pretest": "npm.cmd run compile",
-    "posttest": "npm.cmd run lint",
-    "predeploy": "npm.cmd run compile",
-    "deploy": "npm.cmd publish --access public"
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint",
+    "predeploy": "npm run compile",
+    "deploy": "npm publish --access public"
   },
   "devDependencies": {
     "@types/mocha": "^8.2.2",

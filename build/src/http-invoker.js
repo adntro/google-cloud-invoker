@@ -4,7 +4,9 @@ exports.invokeEndpoint = void 0;
 const fetch = require('node-fetch');
 const { getIdToken } = require('@adntro/google-cloud-auth');
 const log = (...m) => console.log(...m);
-async function getHeaders(resourceUrl) {
+async function getHeaders(url) {
+    // Trim subpaths & querystring
+    const resourceUrl = url.split(/[\/\?]/g).slice(0, 4).join('/');
     const token = await getIdToken(resourceUrl);
     return {
         'Content-Type': 'application/json',

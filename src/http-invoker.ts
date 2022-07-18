@@ -3,7 +3,9 @@ const {getIdToken} = require('@adntro/google-cloud-auth');
 
 const log = (...m: unknown[]) => console.log(...m);
 
-async function getHeaders(resourceUrl: string) {
+async function getHeaders(url: string) {
+  // Trim subpaths & querystring
+  const resourceUrl = url.split(/[\/\?]/g).slice(0,4).join('/');
   const token = await getIdToken(resourceUrl);
   return {
     'Content-Type': 'application/json',
