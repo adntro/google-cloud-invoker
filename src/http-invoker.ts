@@ -1,11 +1,11 @@
 const fetch = require('node-fetch');
-const {getIdToken} = require('@adntro/google-cloud-auth');
+const { getIdToken } = require('@adntro/google-cloud-auth');
 
 const log = (...m: unknown[]) => console.log(...m);
 
 async function getHeaders(url: string) {
   // Trim subpaths & querystring
-  const resourceUrl = url.split(/[\/\?]/g).slice(0,4).join('/');
+  const resourceUrl = url.split(/[\/\?]/g).slice(0, 4).join('/');
   const token = await getIdToken(resourceUrl);
   return {
     'Content-Type': 'application/json',
@@ -25,17 +25,15 @@ export interface InvokeResponse<T> {
   };
 }
 
-export async function invokeEndpoint<T>(
-  url: string,
-  data?: unknown
-): Promise<InvokeResponse<T>> {
+export async function invokeEndpoint<T>(url: string, data?: unknown): Promise<InvokeResponse<T>> {
   if (!url) throw new Error('No url provided');
   const headers = await getHeaders(url);
-  const res = await fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(data),
+  let requestData = {
+    method: data ? 'POST' : 'GET',
+    body: data ? JSON.stringify(data) : undefined,
     headers,
-  });
+  }
+  const res = await fetch(url, requestData);
   let result = await res.text();
   try {
     result = JSON.parse(result);

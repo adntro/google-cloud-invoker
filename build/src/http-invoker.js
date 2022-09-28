@@ -18,11 +18,12 @@ async function invokeEndpoint(url, data) {
     if (!url)
         throw new Error('No url provided');
     const headers = await getHeaders(url);
-    const res = await fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(data),
+    let requestData = {
+        method: data ? 'POST' : 'GET',
+        body: data ? JSON.stringify(data) : undefined,
         headers,
-    });
+    };
+    const res = await fetch(url, requestData);
     let result = await res.text();
     try {
         result = JSON.parse(result);

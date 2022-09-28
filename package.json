@@ -1,6 +1,6 @@
 {
   "name": "@adntro/google-cloud-invoker",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Google Cloud Run & Google Cloud Function invoker",
   "author": "Adntro Genetics SL",
   "repository": {
